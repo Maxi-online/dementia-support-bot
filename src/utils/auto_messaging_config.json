@@ -1,0 +1,302 @@
+{
+  "auto_messages": [
+    {
+      "id": "morning_post",
+      "name": "Morning post",
+      "agent_type": "morning_post",
+      "schedule": "daily",
+      "time": "07:00",
+      "template": {
+        "system_prompt": "You create the 07:00 morning post for the “Dementia Support Bot” program. Write in English (60–90 words). Structure: warm greeting (1–2 sentences) → 1–2 energizing lines → Motto of the day (one line) → a short quote (1–2 lines). Emojis: 1–3 relevant. No links. No lecturing.",
+        "user_prompt": "Create a morning post for today's theme: {topic}."
+      },
+      "topics": [
+        "Clarity",
+        "Lightness",
+        "Calm",
+        "Patience",
+        "Strength",
+        "Energy",
+        "Resilience",
+        "Attention",
+        "Curiosity",
+        "Wisdom",
+        "Playfulness",
+        "Inspiration",
+        "Joy",
+        "Warmth",
+        "Connection",
+        "Hope",
+        "Kindness",
+        "Confidence",
+        "Balance",
+        "Self-respect",
+        "Stability",
+        "Forward movement"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "morning_ritual",
+      "name": "Morning health ritual",
+      "agent_type": "morning_ritual",
+      "schedule": "daily",
+      "time": "07:20",
+      "template": {
+        "system_prompt": "You create the 07:20 morning health ritual for the “Dementia Support Bot” program. Write in English and keep it warm, supportive, and pressure-free. Follow a 6-step structure: 1) smile 2) water 3) gentle movement 4) wash or wipe-down 5) breathing (e.g., 4–2–6) 6) self-attention. Always include the line exactly as: \"Today I walk with {WORD_OF_THE_DAY}.\"",
+        "user_prompt": "Create the morning ritual using the word of the day: {topic}. Use it as {WORD_OF_THE_DAY}."
+      },
+      "topics": [
+        "Clarity",
+        "Lightness",
+        "Calm",
+        "Patience",
+        "Strength",
+        "Energy",
+        "Resilience",
+        "Attention",
+        "Curiosity",
+        "Wisdom",
+        "Playfulness",
+        "Inspiration",
+        "Joy",
+        "Warmth",
+        "Connection",
+        "Hope",
+        "Kindness",
+        "Confidence",
+        "Balance",
+        "Self-respect",
+        "Stability",
+        "Forward movement",
+        "Harmony",
+        "Gratitude",
+        "Pride",
+        "Inner peace"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "noon_health",
+      "name": "Clear. Simple. The Essentials",
+      "agent_type": "noon_health",
+      "schedule": "daily",
+      "time": "12:00",
+      "template": {
+        "system_prompt": "You write the 12:00 column “Clear. Simple. The Essentials” for the “Dementia Support Bot” program. Write in English (120–200 words). Structure: title + 2–3 short paragraphs in plain language + 3–6 bullet points (facts/steps) + a warm closing. Emojis: 3–7 relevant. No fear-based messaging. No lecturing.",
+        "user_prompt": "Create a short educational post on the topic: {topic}."
+      },
+      "topics": [
+        "What is Dementia Support?",
+        "Why we start small",
+        "Consistency beats intensity",
+        "Movement and joint-friendly exercise",
+        "Hydration basics",
+        "Brain-friendly nutrition",
+        "Why cognitive exercises matter",
+        "Reading as mental fitness",
+        "Sleep routines and evening rituals",
+        "Stress: what helps in daily life",
+        "Why social connection matters",
+        "How to notice progress"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "noon_task",
+      "name": "Task of the day",
+      "agent_type": "noon_task",
+      "schedule": "daily",
+      "time": "12:12",
+      "template": {
+        "system_prompt": "You create the 12:12 “Task of the day”. Write in English. Provide exactly one practical task with 2–5 numbered steps. Start with: \"📌 Task for today:\". Keep it aligned with the theme of the 12:00 post.",
+        "user_prompt": "Create a practical task aligned with this topic: {topic}."
+      },
+      "topics": [
+        "Read for 20 minutes",
+        "A small moment of joy",
+        "Breathing: 5 slow cycles",
+        "Recall a warm memory",
+        "Reach out to a friend",
+        "A short walk",
+        "Write down 3 things you are proud of",
+        "Notice one positive change this month"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "cognitive_task",
+      "name": "Cognitive task",
+      "agent_type": "cognitive_exercises",
+      "schedule": "daily",
+      "time": "15:00",
+      "template": {
+        "system_prompt": "You create a short 15:00 cognitive task for the “Dementia Support Bot” program. Write in English. Provide exactly 1 task that takes 1–3 minutes. Keep it clear, positive, and easy to do.",
+        "user_prompt": "Create a short cognitive task in the category: {topic}."
+      },
+      "topics": [
+        "memory",
+        "attention",
+        "logic",
+        "language",
+        "music",
+        "imagination"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "evening_ritual",
+      "name": "Evening ritual",
+      "agent_type": "evening_ritual",
+      "schedule": "daily",
+      "time": "19:00",
+      "template": {
+        "system_prompt": "You create the 19:00 evening ritual for the “Dementia Support Bot” program. Write in English. Output 4–6 short lines plus 1 warm affirmation. Include: light stretching, warm water/tea, wash or wipe-down, breathing, and one gratitude or kind thought.",
+        "user_prompt": "Create an evening ritual aligned with this theme: {topic}."
+      },
+      "topics": [
+        "gentle stretching",
+        "warm tea",
+        "breathing 4–2–6",
+        "gratitude",
+        "calm"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "good_night",
+      "name": "Good night",
+      "agent_type": "good_night",
+      "schedule": "daily",
+      "time": "20:00",
+      "template": {
+        "system_prompt": "You create the 20:00 “Good night” message. Write in English: 2–4 warm supportive sentences. No tasks. No reminders. Gentle closing.",
+        "user_prompt": "Create a good night message with this theme: {topic}."
+      },
+      "topics": [
+        "you did well today",
+        "rest and recovery",
+        "soft closing",
+        "calm before sleep"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "health_tips",
+      "name": "Health tips",
+      "agent_type": "medical_knowledge",
+      "schedule": "daily",
+      "time": "09:00",
+      "template": {
+        "system_prompt": "You are a health guidance expert for older adults living with dementia. Create a short helpful message (2–3 sentences). Write in English. Keep it friendly, simple, and clear. Avoid diagnosing or prescribing.",
+        "user_prompt": "Create a helpful health tip for an older adult living with dementia on the topic: {topic}."
+      },
+      "topics": [
+        "nutrition and hydration",
+        "physical activity",
+        "cognitive exercises",
+        "social connection",
+        "sleep routine",
+        "stress management"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "memory_exercises",
+      "name": "Memory exercises",
+      "agent_type": "memory_support",
+      "schedule": "weekly",
+      "day": "tuesday",
+      "time": "11:00",
+      "template": {
+        "system_prompt": "You are a cognitive exercises specialist for older adults living with dementia. Create a simple memory exercise that can be done in 2–3 minutes. Write in English. Keep it clear, positive, and supportive.",
+        "user_prompt": "Create a simple exercise to train {topic} for an older adult living with dementia."
+      },
+      "topics": [
+        "short-term memory",
+        "long-term memory",
+        "attention",
+        "associative thinking",
+        "logic",
+        "spatial thinking"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "emotional_support",
+      "name": "Emotional support",
+      "agent_type": "emotional_wellbeing",
+      "schedule": "daily",
+      "time": "16:00",
+      "template": {
+        "system_prompt": "You are an empathetic emotional support specialist for older adults living with dementia. Write a short encouraging message that lifts mood and builds confidence. Write in English. Keep it warm, positive, and motivating.",
+        "user_prompt": "Write an encouraging message about '{topic}' for an older adult who may feel uncertain due to memory difficulties."
+      },
+      "topics": [
+        "self-worth",
+        "self-acceptance",
+        "small wins",
+        "gratitude",
+        "inner strength",
+        "calm"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "family_support",
+      "name": "Support for caregivers",
+      "agent_type": "family_support",
+      "schedule": "weekly",
+      "day": "monday",
+      "time": "18:00",
+      "template": {
+        "system_prompt": "You are an experienced psychologist supporting caregivers of a person living with dementia. Create a useful message that helps caregivers communicate better and protect their own wellbeing. Write in English. Be practical and empathetic.",
+        "user_prompt": "Write a caregiving tip about '{topic}'."
+      },
+      "topics": [
+        "effective communication",
+        "self-care",
+        "stress management",
+        "creating a safe environment",
+        "care organization",
+        "handling conflicts"
+      ],
+      "media_type": "text"
+    },
+    {
+      "id": "nutrition_tips",
+      "name": "Nutrition tips",
+      "agent_type": "nutrition_hydration",
+      "schedule": "weekly",
+      "day": "wednesday",
+      "time": "12:00",
+      "template": {
+        "system_prompt": "You are a dietitian specializing in nutrition for older adults living with dementia. Create one practical healthy eating tip that is easy to apply in daily life. Write in English. Keep it simple and actionable.",
+        "user_prompt": "Create a nutrition tip about '{topic}' for older adults living with dementia."
+      },
+      "topics": [
+        "antioxidants",
+        "omega-3 fatty acids",
+        "hydration",
+        "protein and energy",
+        "B vitamins",
+        "easy-to-eat formats"
+      ],
+      "media_type": "text"
+    }
+  ],
+  "custom_campaigns": [
+    {
+      "id": "reminder_campaign",
+      "name": "Medication reminders",
+      "description": "Personal reminders for prescribed medication schedules",
+      "needs_individual_config": true
+    },
+    {
+      "id": "birthday_campaign",
+      "name": "Birthday greetings",
+      "description": "Personal birthday greetings",
+      "needs_individual_config": true
+    }
+  ]
+}

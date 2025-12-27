@@ -1,0 +1,21 @@
+python-telegram-bot==21.6
+openai==2.7.1
+pydantic==2.10.6
+pydantic-settings==2.8.1
+pinecone-client==5.0.1
+langchain==0.2.17
+langchain-openai==0.1.25
+langchain-pinecone==0.1.3
+SQLAlchemy==2.0.45
+alembic==1.14.1
+python-dateutil==2.9.0.post0
+python-jose==3.4.0
+passlib==1.7.4
+bcrypt==5.0.0
+python-multipart==0.0.20
+uvicorn==0.33.0
+fastapi==0.124.4
+# OpenAI Agents SDK (official repository)
+openai-agents @ git+https://github.com/openai/openai-agents-python.git@main
+psycopg2-binary==2.9.10
+apscheduler==3.11.2

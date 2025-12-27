@@ -1,0 +1,161 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    container_name: dementia_postgres
+    environment:
+      POSTGRES_DB: dementia_db
+      POSTGRES_USER: dementia_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dementia_secure_pass}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - dementia_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dementia_user -d dementia_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: dementia_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - dementia_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Telegram bot service
+  telegram-bot:
+    build:
+      context: ../
+      dockerfile: docker/services/telegram-bot/Dockerfile
+    container_name: dementia_telegram_bot
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8001:8001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      messaging-service:
+        condition: service_started
+      agent-service:
+        condition: service_started
+    networks:
+      - dementia_network
+    restart: unless-stopped
+    volumes:
+      - ../logs:/app/logs
+      - ../settings.json:/app/settings.json:ro
+
+  # Messaging service (auto-messages, schedulers)
+  messaging-service:
+    build:
+      context: ../
+      dockerfile: docker/services/messaging/Dockerfile
+    container_name: dementia_messaging_service
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8002:8002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dementia_network
+    restart: unless-stopped
+    volumes:
+      - ../logs:/app/logs
+      - ../settings.json:/app/settings.json:ro
+
+  # Agent service (LLM agents)
+  agent-service:
+    build:
+      context: ../
+      dockerfile: docker/services/agent/Dockerfile
+    container_name: dementia_agent_service
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8003:8003"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dementia_network
+    restart: unless-stopped
+    volumes:
+      - ../logs:/app/logs
+      - ../settings.json:/app/settings.json:ro
+
+  # API service for external integrations
+  api-service:
+    build:
+      context: ../
+      dockerfile: docker/services/api/Dockerfile
+    container_name: dementia_api_service
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - "8004:8004"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dementia_network
+    restart: unless-stopped
+    volumes:
+      - ../logs:/app/logs
+      - ../settings.json:/app/settings.json:ro
+
+  # Nginx as an API gateway
+  nginx:
+    image: nginx:alpine
+    container_name: dementia_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - telegram-bot
+      - messaging-service
+      - agent-service
+      - api-service
+    networks:
+      - dementia_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  dementia_network:
+    driver: bridge

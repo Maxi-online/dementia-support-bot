@@ -1,0 +1,74 @@
+{
+  "database": {
+    "url": "postgresql://dementia_user:your_secure_postgres_password@postgres:5432/dementia_db",
+    "host": "postgres",
+    "port": 5432,
+    "name": "dementia_db",
+    "username": "dementia_user",
+    "password": "your_secure_postgres_password"
+  },
+  "redis": {
+    "url": "redis://redis:6379",
+    "host": "redis",
+    "port": 6379,
+    "db": 0
+  },
+  "telegram": {
+    "bot_token": "your_telegram_bot_token",
+    "webhook_url": "https://your-domain.com/webhook/",
+    "webhook_secret": "your_webhook_secret"
+  },
+  "openai": {
+    "api_key": "your_openai_api_key",
+    "base_url": "https://api.openai.com/v1",
+    "model": "gpt-5-nano",
+    "max_tokens": 2000,
+    "temperature": 0.7,
+    "timeout": 60
+  },
+  "services": {
+    "telegram_bot_url": "http://telegram-bot:8001",
+    "messaging_service_url": "http://messaging-service:8002",
+    "agent_service_url": "http://agent-service:8003",
+    "api_service_url": "http://api-service:8004"
+  },
+  "security": {
+    "api_key": "your_api_key_for_external_access",
+    "jwt_secret": "your_jwt_secret",
+    "allowed_hosts": ["*"]
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file_path": "/app/logs",
+    "max_file_size": "10MB",
+    "backup_count": 5
+  },
+  "application": {
+    "debug": false,
+    "timezone": "Your/City",
+    "language": "en",
+    "environment": "production"
+  },
+  "features": {
+    "auto_messaging_enabled": true,
+    "webhook_mode": true,
+    "health_checks_enabled": true,
+    "metrics_enabled": true
+  },
+  "limits": {
+    "max_users_per_day": 1000,
+    "max_messages_per_user_per_hour": 50,
+    "max_agent_requests_per_minute": 30
+  },
+  "pinecone": {
+    "api_key": "",
+    "host": "",
+    "index_name": "dementia"
+  },
+  "yandex": {
+    "api_key": "",
+    "speechkit_url": "https://stt.api.cloud.yandex.net",
+    "folder_id": ""
+  }
+}
