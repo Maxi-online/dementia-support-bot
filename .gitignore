@@ -12,6 +12,7 @@ env/
 dementia_env/
 
 ### Environment/config files (keep examples, ignore real secrets)
+.env
 .env.*
 !.env.example
 settings.json
