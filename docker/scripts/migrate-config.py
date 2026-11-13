@@ -30,12 +30,12 @@ def create_settings_from_env(env_vars):
     """Create a settings.json structure from environment variables."""
     settings = {
         "database": {
-            "url": f"postgresql://dementia_user:{env_vars.get('POSTGRES_PASSWORD', 'dementia_secure_pass')}@postgres:5432/dementia_db",
+            "url": f"postgresql://dementia_user:{env_vars.get('POSTGRES_PASSWORD', "")}@postgres:5432/dementia_db",
             "host": "postgres",
             "port": 5432,
             "name": "dementia_db",
             "username": "dementia_user",
-            "password": env_vars.get("POSTGRES_PASSWORD", "dementia_secure_pass"),
+            "password": env_vars.get("POSTGRES_PASSWORD", ""),
         },
         "redis": {"url": "redis://redis:6379", "host": "redis", "port": 6379, "db": 0},
         "telegram": {
