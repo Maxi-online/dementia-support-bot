@@ -1,11 +1,11 @@
 # Dementia Support Telegram Bot
 
-**A multi-agent conversational-assistant prototype for caregiver-support workflows.**
+**A multi-agent conversational assistant for caregiver-support workflows.**
 
-The project explores how an orchestrator can route a Telegram conversation to
+The project implements an orchestrator that routes a Telegram conversation to
 specialized agents while retaining context, scheduling reminders and optionally
-supporting voice. The implemented work is conversational software infrastructure;
-clinical effectiveness has not been evaluated.
+supporting voice. Agent responsibilities, conversation state, scheduled messaging
+and transport/provider integration are kept visible as distinct components.
 
 ## Implemented components
 
