@@ -94,10 +94,10 @@ outcomes or medical-quality scores are claimed here.
 
 [MIT](LICENSE). Third-party APIs and libraries retain their own terms.
 
-## Конфигурация, приватность и воспроизведение
+## Configuration, privacy and reproducibility
 
-Используйте `.env.example` и `src/core/settings.json.example` как схемы настройки; проверьте фактический порядок загрузки в `src/core/config.py`. Служебный скрипт миграции требует собственный пароль PostgreSQL. Медицинские диалоги, записи пользователей, резервные копии базы и TLS-ключи храните вне Git. Демонстрации проводите на синтетических данных.
+Use `.env.example` and `src/core/settings.json.example` as configuration schemas, and check the loading order in `src/core/config.py`. The maintenance migration script requires the operator's PostgreSQL password. Keep health-related conversations, user records, database backups and TLS private keys outside Git. Use synthetic records for demonstrations.
 
-Секреты храните в игнорируемых локальных файлах или переменных окружения. Безопасные примеры содержат только структуру настройки. Не передавайте секреты в командной строке и не добавляйте заполненные `.env`, приватные ключи, базы данных и логи в коммиты.
+Keep credentials in ignored local files or environment variables. Configuration examples contain structure only. Avoid passing secrets on the command line or committing populated `.env` files, private keys, databases or logs.
 
-Workflow [Secret scan](.github/workflows/secret-scan.yml) проверяет текущие файлы и входящие коммиты Gitleaks 8.30.1 с редактированием значений в выводе. Это проверка на известные шаблоны, а не подтверждение отсутствия всех возможных утечек. Удаление значения из HEAD не очищает старую историю; порядок действий описан в [SECURITY.md](SECURITY.md).
+The [Secret scan](.github/workflows/secret-scan.yml) workflow scans current files and incoming commits with Gitleaks 8.30.1 and redacts matched values. Pattern scanning cannot prove that every possible disclosure is absent. Removing a value from HEAD does not clean older history; see [SECURITY.md](SECURITY.md) for incident handling.
