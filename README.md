@@ -1,54 +1,95 @@
 # Dementia Support Telegram Bot
 
-A multi-agent Telegram bot that provides supportive conversations and guidance for people living with dementia and their caregivers.
+**A multi-agent conversational-assistant prototype for caregiver-support workflows.**
 
-This repository is prepared for public GitHub hosting: **no secrets are committed**, and runtime artifacts (DB files, logs, chat history, caches, virtual environments) are excluded via `.gitignore`.
+The project explores how an orchestrator can route a Telegram conversation to
+specialized agents while retaining context, scheduling reminders and optionally
+supporting voice. The implemented work is conversational software infrastructure;
+clinical effectiveness has not been evaluated.
 
-## Key features
+## Implemented components
 
-- Routing via an orchestrator to specialized agents (memory support, crisis intervention, medical knowledge, family support, etc.)
-- Scheduled reminders and automated messaging
-- Optional voice: speech-to-text and text-to-speech via Yandex SpeechKit (if configured)
+- An orchestrator for agent selection, conversation context and response handling.
+- Specialized agent modules for memory prompts, routines, family support,
+  wellbeing, general enquiries and related conversation topics.
+- Conversation summarization and history access.
+- Reminder and automated-message components.
+- Optional speech-to-text/text-to-speech through Yandex SpeechKit.
+- Local application and Docker service layouts for bot, agent, API and messaging roles.
 
-## Requirements
+The agent names describe routing roles. They do not establish medical expertise,
+diagnostic accuracy or a validated emergency-response service.
 
-- Python 3.11+
-- (Optional) PostgreSQL + Redis (recommended for production / Docker deployment)
+## Architecture
 
-## Configuration (no `.env` for app secrets)
-
-All application secrets and credentials must be stored in **`settings.json`** (ignored by git).
-
-1. Copy the example config:
-
-```bash
-copy src\core\settings.json.example settings.json
+```mermaid
+flowchart LR
+    A[Telegram text / optional voice] --> B[Message orchestrator]
+    B --> C[Conversation context]
+    B --> D[Specialized agents]
+    D --> E[Response / handoff]
+    F[Reminder and messaging components] --> A
+    E --> A
 ```
 
-1. Edit `settings.json` and fill:
+Key source entry points:
 
-- `telegram.bot_token`
-- `openai.api_key`
-- (Optional) `yandex.*` for voice features
+- [Application startup](src/main.py)
+- [Orchestrator](src/core/orchestrator.py)
+- [Agent modules](src/agents)
+- [Configuration loader](src/core/config.py)
+- [Automatic messaging](README_auto_messaging.md)
 
-## Local run
+## Local setup
+
+Use Python 3.11+ and create a project environment:
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python -m src.main
+git clone https://github.com/Maxi-online/dementia-support-bot.git
+cd dementia-support-bot
+python -m venv .venv
 ```
 
-## Docker deployment
+On Windows PowerShell:
 
-See `docker/README.md`.
+```powershell
+& .venv/Scripts/python.exe -m pip install -r requirements.txt
+if (!(Test-Path -LiteralPath settings.json)) { Copy-Item -LiteralPath src/core/settings.json.example -Destination settings.json }
+```
 
-## Security & privacy notes
+On Linux/macOS:
 
-- **Do not commit** `settings.json`, DB files, chat history (`dialogs/`) or any user data.
-- This project can write dialog history to local files for debugging; for public deployment you should keep `dialogs/` disabled/ignored and use secure storage if needed.
+```bash
+.venv/bin/python -m pip install -r requirements.txt
+test -e settings.json || cp src/core/settings.json.example settings.json
+```
+
+For a fresh setup, edit `settings.json` with `telegram.bot_token` and
+`openai.api_key`. Voice features additionally require the configured Yandex
+settings. Keep existing credentials when adapting an established deployment;
+the copy commands above initialize a fresh configuration.
+
+Start the configured application with the environment's Python:
+
+```powershell
+& .venv/Scripts/python.exe -m src.main
+```
+
+The equivalent POSIX command is `.venv/bin/python -m src.main`.
+[Docker deployment instructions](docker/README.md) describe the separate service
+layout; a Compose layout alone is not evidence of a verified production deployment.
+
+## Data and validation boundaries
+
+Conversation history and reminder data can contain personal information. Keep
+runtime configuration, databases, logs and dialog history outside published
+examples. Use synthetic conversations for demonstrations.
+
+The repository demonstrates routing, scheduling and messenger/provider
+integration. Agent quality, difficult handoffs, reminder delivery and behaviour
+during provider failures require separate end-to-end evaluation. No clinical
+outcomes or medical-quality scores are claimed here.
 
 ## License
 
-MIT (see `LICENSE`).
+[MIT](LICENSE). Third-party APIs and libraries retain their own terms.
