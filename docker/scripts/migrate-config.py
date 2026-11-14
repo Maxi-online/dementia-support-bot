@@ -6,6 +6,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 
 def load_env_file(env_file_path):
@@ -28,14 +29,18 @@ def load_env_file(env_file_path):
 
 def create_settings_from_env(env_vars):
     """Create a settings.json structure from environment variables."""
+    password = env_vars.get("POSTGRES_PASSWORD", "")
+    if not password:
+        raise ValueError("POSTGRES_PASSWORD must be supplied explicitly")
+    encoded_password = quote(password, safe="")
     settings = {
         "database": {
-            "url": f"postgresql://dementia_user:{env_vars.get('POSTGRES_PASSWORD', "")}@postgres:5432/dementia_db",
+            "url": f"postgresql://dementia_user:{encoded_password}@postgres:5432/dementia_db",
             "host": "postgres",
             "port": 5432,
             "name": "dementia_db",
             "username": "dementia_user",
-            "password": env_vars.get("POSTGRES_PASSWORD", ""),
+            "password": password,
         },
         "redis": {"url": "redis://redis:6379", "host": "redis", "port": 6379, "db": 0},
         "telegram": {
